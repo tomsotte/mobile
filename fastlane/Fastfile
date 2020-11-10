@@ -99,13 +99,6 @@ platform :android do
 
   def deploy_android(variant, versionCode, track = 'internal')
     build_android(variant, versionCode)
-    upload_to_play_store(
-      track: track,
-      json_key_data: "#{ENV["GOOGLE_PLAY_JSON_KEY_DATA"]}",
-      skip_upload_metadata: true,
-      skip_upload_images: true,
-      skip_upload_screenshots: true
-    )
     bundletool(
       ks_path: 'android/app/keystore.keystore',
       ks_password: ENV["ANDROID_KEYSTORE_PASSWORD"],
@@ -117,9 +110,6 @@ platform :android do
       verbose: true,
     )
     # code here runs in the parent directory
-    Dir.chdir("..") do
-      sh("yarn bugsnag-sourcemaps upload --api-key=#{ENV['BUGSNAG_APIKEY']} --app-version=#{versionCode} --minifiedFile=android/app/build/generated/assets/react/#{variant}/release/index.android.bundle --source-map=android/app/build/generated/sourcemaps/react/#{variant}/release/index.android.bundle.map --minified-url=index.android.bundle --upload-sources")
-    end
   end
 
   desc "Deploy dev app"
