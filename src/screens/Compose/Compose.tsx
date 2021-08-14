@@ -47,6 +47,7 @@ type State = {
   editorComponent: SNComponent | undefined;
   webViewError: boolean;
   loadingWebview: boolean;
+  isEditingTitle: boolean;
 };
 
 export class Compose extends React.Component<{}, State> {
@@ -80,6 +81,7 @@ export class Compose extends React.Component<{}, State> {
       saveError: false,
       webViewError: false,
       loadingWebview: false,
+      isEditingTitle: false,
     };
   }
 
@@ -469,9 +471,11 @@ export class Compose extends React.Component<{}, State> {
                       placeholderTextColor={theme.stylekitNeutralColor}
                       keyboardAppearance={themeService?.keyboardColorForActiveTheme()}
                       autoCorrect={true}
-                      multiline={!this.state.isEditing}
+                      multiline={this.state.isEditingTitle}
                       autoCapitalize={'sentences'}
                       editable={!this.noteLocked}
+                      onBlur={() => this.setState({ isEditingTitle: false })}
+                      onFocus={() => this.setState({ isEditingTitle: true })}
                     />
                     {this.state.loadingWebview && (
                       <LoadingWebViewContainer locked={this.noteLocked}>
