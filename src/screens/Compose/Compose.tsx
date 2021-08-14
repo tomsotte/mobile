@@ -469,6 +469,7 @@ export class Compose extends React.Component<{}, State> {
                       placeholderTextColor={theme.stylekitNeutralColor}
                       keyboardAppearance={themeService?.keyboardColorForActiveTheme()}
                       autoCorrect={true}
+                      multiline={!this.state.isEditing}
                       autoCapitalize={'sentences'}
                       editable={!this.noteLocked}
                     />

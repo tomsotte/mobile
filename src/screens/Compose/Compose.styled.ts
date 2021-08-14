@@ -46,7 +46,7 @@ export const NoteTitleInput = styled.TextInput`
   font-size: ${Platform.OS === 'ios' ? 17 : 18}px;
   color: ${({ theme }) => theme.stylekitForegroundColor};
   background-color: ${({ theme }) => theme.stylekitBackgroundColor};
-  height: ${NOTE_TITLE_HEIGHT}px;
+  min-height: ${NOTE_TITLE_HEIGHT}px;
   border-bottom-color: ${({ theme }) => theme.stylekitBorderColor};
   border-bottom-width: 1px;
   padding-top: ${Platform.OS === 'ios' ? 5 : 12}px;
